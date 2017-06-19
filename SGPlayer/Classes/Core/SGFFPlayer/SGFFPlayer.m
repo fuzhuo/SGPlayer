@@ -246,7 +246,7 @@
 
 #pragma mark - replace video
 
-- (void)replaceVideo
+- (void)replaceVideo: (NSMutableDictionary*)options
 {
     [self clean];
     if (!self.abstractPlayer.contentURL) return;
@@ -256,9 +256,15 @@
                                              delegate:self
                                     videoOutputConfig:self
                                     audioOutputConfig:self];
-    self.decoder.formatContextOptions = [self.abstractPlayer.decoder FFmpegFormatContextOptions];
     self.decoder.codecContextOptions = [self.abstractPlayer.decoder FFmpegCodecContextOptions];
     self.decoder.hardwareAccelerateEnable = self.abstractPlayer.decoder.hardwareAccelerateEnableForFFmpeg;
+    if (options != nil) {
+        for (NSString *key in options) {
+            NSString *value = [options valueForKey:key];
+            [self.abstractPlayer.decoder setFFmpegFormatContextOptionStringValue:value forKey:key];
+        }
+    }
+    self.decoder.formatContextOptions = [self.abstractPlayer.decoder FFmpegFormatContextOptions];
     [self.decoder open];
     [self reloadVolume];
     [self reloadPlayableBufferInterval];

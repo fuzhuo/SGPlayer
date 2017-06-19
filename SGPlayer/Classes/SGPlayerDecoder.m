@@ -144,7 +144,7 @@
     self.formatContextOptions = [NSMutableDictionary dictionary];
     self.codecContextOptions = [NSMutableDictionary dictionary];
     
-    [self setFFmpegFormatContextOptionStringValue:@"SGPlayer" forKey:@"user-agent"];
+    //[self setFFmpegFormatContextOptionStringValue:@"SGPlayer" forKey:@"user-agent"];
     [self setFFmpegFormatContextOptionIntValue:20 * 1000 * 1000 forKey:@"timeout"];
     [self setFFmpegFormatContextOptionIntValue:1 forKey:@"reconnect"];
 }
@@ -161,7 +161,11 @@
 
 - (void)setFFmpegFormatContextOptionStringValue:(NSString *)value forKey:(NSString *)key
 {
-    [self.formatContextOptions setValue:value forKey:key];
+    if ([key isEqualToString:@"User-Agent"] || [key isEqualToString:@"Referer"]) {
+        [self.formatContextOptions setValue:value forKey:key.lowercaseString];
+    } else {
+        [self.formatContextOptions setValue:value forKey:key];
+    }
 }
 
 - (void)removeFFmpegFormatContextOptionForKey:(NSString *)key

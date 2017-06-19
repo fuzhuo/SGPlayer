@@ -99,7 +99,31 @@ static int ffmpeg_interrupt_callback(void *ctx)
     _format_context->interrupt_callback.callback = ffmpeg_interrupt_callback;
     _format_context->interrupt_callback.opaque = (__bridge void *)self;
     
-    AVDictionary * options = SGFFFFmpegBrigeOfNSDictionary(self.formatContextOptions);
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    for (NSString *key in self.formatContextOptions.allKeys) {
+        if ([key isEqualToString:@"headers"]) {
+            NSDictionary *headers = [self.formatContextOptions valueForKey:key];
+            NSString *result = @"";
+            for (NSString *k in headers) {
+                NSString *val = [headers objectForKey:k];
+                if ([k isEqualToString:@"User-Agent"]) {
+                    [dict setObject:val forKey:@"user_agent"];
+                    NSLog(@"zfu options %@ %@", @"user_agent", val);
+                } else {
+                    result = [NSString stringWithFormat:@"%@%@:%@\r\n", result, k, val];
+                }
+            }
+            if (result.length > 0) {
+                NSLog(@"zfu options %@ %@", @"headers", result);
+                [dict setObject:result forKey:@"headers"];
+            }
+        } else {
+            NSLog(@"zfu options %@ %@", key, [self.formatContextOptions valueForKey:key]);
+            [dict setObject:[self.formatContextOptions valueForKey:key] forKey:key];
+        }
+    }
+    //AVDictionary * options = SGFFFFmpegBrigeOfNSDictionary(self.formatContextOptions);
+    AVDictionary * options = SGFFFFmpegBrigeOfNSDictionary(dict);
     
     // options filter.
     NSString * URLString = [self contentURLString];

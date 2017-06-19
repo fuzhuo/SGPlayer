@@ -36,7 +36,6 @@ static NSString * const AVMediaSelectionOptionTrackIDKey = @"MediaSelectionOptio
 
 @property (nonatomic, assign) SGPlayerState stateBeforBuffering;
 
-
 #pragma mark - track info
 
 @property (nonatomic, assign) BOOL videoEnable;
@@ -79,7 +78,7 @@ static NSString * const AVMediaSelectionOptionTrackIDKey = @"MediaSelectionOptio
             break;
         case SGPlayerStateFailed:
             [self replaceEmpty];
-            [self replaceVideo];
+            [self replaceVideo: self.options];
             break;
         case SGPlayerStateNone:
             self.state = SGPlayerStateBuffering;
@@ -466,14 +465,21 @@ static NSString * const AVMediaSelectionOptionTrackIDKey = @"MediaSelectionOptio
 
 #pragma mark - replace video
 
-- (void)replaceVideo
+- (void)replaceVideo: (NSDictionary*)options
 {
     [self replaceEmpty];
     if (!self.abstractPlayer.contentURL) return;
     
     [self.abstractPlayer.displayView playerOutputTypeAV];
     [self startBuffering];
-    self.avAsset = [AVURLAsset assetWithURL:self.abstractPlayer.contentURL];
+    if (options && [options.allKeys containsObject:@"headers"]) {
+        NSDictionary *headers = [options valueForKey:@"headers"];
+        self.avAsset = [AVURLAsset URLAssetWithURL:self.abstractPlayer.contentURL options:@{@"AVURLAssetHTTPHeaderFieldsKey" : headers}];
+    } else {//default options
+        NSMutableDictionary *headers = [NSMutableDictionary dictionary];
+        [headers setObject:@"SGPlayer" forKey:@"User-Agent"];
+        self.avAsset = [AVURLAsset URLAssetWithURL:self.abstractPlayer.contentURL options:@{@"AVURLAssetHTTPHeaderFieldsKey" : headers}];
+    }
     switch (self.abstractPlayer.videoType) {
         case SGVideoTypeNormal:
             [self setupAVPlayerItemAutoLoadedAsset:YES];

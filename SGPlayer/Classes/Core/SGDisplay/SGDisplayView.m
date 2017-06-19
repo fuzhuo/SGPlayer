@@ -118,6 +118,7 @@
                 break;
             case SGGravityModeResizeAspect:
                 self.avplayerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+                NSLog(@"zfu avplayer video Gravity mode is resize aspect");
                 break;
             case SGGravityModeResizeAspectFill:
                 self.avplayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;

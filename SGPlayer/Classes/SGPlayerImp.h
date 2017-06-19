@@ -69,8 +69,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly, nullable) SGError * error;
 
 - (void)replaceEmpty;
-- (void)replaceVideoWithURL:(nullable NSURL *)contentURL;
-- (void)replaceVideoWithURL:(nullable NSURL *)contentURL videoType:(SGVideoType)videoType;
+- (void)replaceVideoWithURL:(nullable NSURL *)contentURL options:(nullable NSMutableDictionary*)options mp4:(BOOL)mp4;
+- (void)replaceVideoWithURL:(nullable NSURL *)contentURL videoType:(SGVideoType)videoType options:(nullable NSMutableDictionary*)options mp4:(BOOL)mp4;
 
 // preview
 @property (nonatomic, assign) SGDisplayMode displayMode;

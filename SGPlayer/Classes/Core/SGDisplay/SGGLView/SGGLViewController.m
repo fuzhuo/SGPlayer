@@ -331,6 +331,7 @@
             } else {
                 glView.frame = superviewFrame;
             }
+            NSLog(@"glview frame [%.2f %.2f %.2f %.2f]", glView.frame.origin.x, glView.frame.origin.y, glView.frame.size.width, glView.frame.size.height);
             break;
         case SGGravityModeResizeAspectFill:
             if (superviewAspect < resultAspect) {

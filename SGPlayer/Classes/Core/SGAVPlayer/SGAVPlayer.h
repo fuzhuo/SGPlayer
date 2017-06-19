@@ -34,8 +34,9 @@
 @property (nonatomic, assign, readonly) NSTimeInterval duration;
 @property (nonatomic, assign, readonly) NSTimeInterval playableTime;
 @property (nonatomic, assign, readonly) BOOL seeking;
+@property (nonatomic, strong) NSMutableDictionary *options;
 
-- (void)replaceVideo;
+- (void)replaceVideo: (NSMutableDictionary*)options;
 - (void)reloadVolume;
 
 - (void)play;

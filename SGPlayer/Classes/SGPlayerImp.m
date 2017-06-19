@@ -57,33 +57,41 @@
 
 - (void)replaceEmpty
 {
-    [self replaceVideoWithURL:nil];
+    [self replaceVideoWithURL:nil options: nil mp4: false];
 }
 
-- (void)replaceVideoWithURL:(nullable NSURL *)contentURL
+- (void)replaceVideoWithURL:(nullable NSURL *)contentURL options:(nullable NSMutableDictionary*)options mp4:(BOOL)mp4
 {
-    [self replaceVideoWithURL:contentURL videoType:SGVideoTypeNormal];
+    [self replaceVideoWithURL:contentURL videoType:SGVideoTypeNormal options:options mp4:mp4];
 }
 
-- (void)replaceVideoWithURL:(nullable NSURL *)contentURL videoType:(SGVideoType)videoType
+- (void)replaceVideoWithURL:(nullable NSURL *)contentURL videoType:(SGVideoType)videoType options:(NSMutableDictionary*)options mp4:(BOOL)mp4
 {
     self.error = nil;
     self.contentURL = contentURL;
     self.decoderType = [self.decoder decoderTypeForContentURL:self.contentURL];
     self.videoType = videoType;
     
+    if (mp4) {
+        self.decoderType = SGDecoderTypeFFmpeg;
+        NSLog(@"zfu force play with AVPlayer");
+    }
+    
     switch (self.decoderType) {
         case SGDecoderTypeAVPlayer:
             if (_ffPlayer) {
                 [self.ffPlayer stop];
             }
-            [self.avPlayer replaceVideo];
+            self.avPlayer.options = options;
+            [self.avPlayer replaceVideo: options];
+            NSLog(@"zfu play with av player");
             break;
         case SGDecoderTypeFFmpeg:
             if (_avPlayer) {
                 [self.avPlayer stop];
             }
-            [self.ffPlayer replaceVideo];
+            [self.ffPlayer replaceVideo: options];
+            NSLog(@"zfu play with ffmpeg");
             break;
         case SGDecoderTypeError:
             if (_avPlayer) {
@@ -117,7 +125,9 @@
 - (void)pause
 {
 #if SGPLATFORM_TARGET_OS_IPHONE_OR_TV
-    [UIApplication sharedApplication].idleTimerDisabled = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIApplication sharedApplication].idleTimerDisabled = NO;
+    });
 #endif
     
     switch (self.decoderType) {
