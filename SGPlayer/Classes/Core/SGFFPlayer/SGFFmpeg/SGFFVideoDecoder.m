@@ -13,7 +13,8 @@
 #import "SGFFFramePool.h"
 #import "SGFFTools.h"
 
-#if SGPLATFORM_TARGET_OS_IPHONE
+//#if SGPLATFORM_TARGET_OS_IPHONE
+#if SGPLATFORM_TARGET_OS_IPHONE_OR_TV
 #import "SGFFVideoToolBox.h"
 #endif
 
@@ -35,7 +36,8 @@ static AVPacket flush_packet;
 
 @property (nonatomic, strong) SGFFFramePool * framePool;
 
-#if SGPLATFORM_TARGET_OS_IPHONE
+//#if SGPLATFORM_TARGET_OS_IPHONE
+#if SGPLATFORM_TARGET_OS_IPHONE_OR_TV
 @property (nonatomic, strong) SGFFVideoToolBox * videoToolBox;
 #endif
 
@@ -94,7 +96,8 @@ static AVPacket flush_packet;
     self.packetQueue = [SGFFPacketQueue packetQueueWithTimebase:self.timebase];
     self.videoToolBoxMaxDecodeFrameCount = 20;
     self.codecContextMaxDecodeFrameCount = 3;
-#if SGPLATFORM_TARGET_OS_IPHONE
+//#if SGPLATFORM_TARGET_OS_IPHONE
+#if SGPLATFORM_TARGET_OS_IPHONE_OR_TV
     if (self.videoToolBoxEnable && _codec_context->codec_id == AV_CODEC_ID_H264) {
         self.videoToolBox = [SGFFVideoToolBox videoToolBoxWithCodecContext:self->_codec_context];
         if ([self.videoToolBox trySetupVTSession]) {
@@ -309,7 +312,8 @@ static AVPacket flush_packet;
 
 - (void)videoToolBoxDecodeAsyncThread
 {
-#if SGPLATFORM_TARGET_OS_IPHONE
+//#if SGPLATFORM_TARGET_OS_IPHONE
+#if SGPLATFORM_TARGET_OS_IPHONE_OR_TV
     
     while (YES) {
         if (!self.videoToolBoxDidOpen) {

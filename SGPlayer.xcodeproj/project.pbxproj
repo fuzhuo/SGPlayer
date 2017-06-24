@@ -593,6 +593,7 @@
 		9CEFA6DB1E7122BF00835CAB /* SGPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEFA6D91E7122BF00835CAB /* SGPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEFA6E51E7125C800835CAB /* SGPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEFA6D91E7122BF00835CAB /* SGPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEFA6F01E7125CC00835CAB /* SGPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEFA6D91E7122BF00835CAB /* SGPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E98526541EFE9D9E007370E2 /* SGFFVideoToolBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C4792B41E713B2700AD4289 /* SGFFVideoToolBox.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2051,6 +2052,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E98526541EFE9D9E007370E2 /* SGFFVideoToolBox.m in Sources */,
 				9C5AB6931E88B2AD0021F460 /* SGGLViewController.m in Sources */,
 				9C4792F41E713B4900AD4289 /* SGGLNormalModel.m in Sources */,
 				9C5AB7071E88F0560021F460 /* SGGLProgramYUV420.m in Sources */,
