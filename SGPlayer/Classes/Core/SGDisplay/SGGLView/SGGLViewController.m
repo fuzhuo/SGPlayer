@@ -112,7 +112,7 @@
     SGVideoType videoType = self.displayView.abstractPlayer.videoType;
     switch (videoType) {
         case SGVideoTypeNormal:
-            self.preferredFramesPerSecond = 35;
+            self.preferredFramesPerSecond = 60;
             break;
         case SGVideoTypeVR:
             self.preferredFramesPerSecond = 60;
