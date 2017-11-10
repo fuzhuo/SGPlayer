@@ -74,7 +74,7 @@
     
     if (mp4) {
         self.decoderType = SGDecoderTypeFFmpeg;
-        NSLog(@"zfu force play with AVPlayer");
+        NSLog(@"zfu force play with FFPlayer");
     }
     
     switch (self.decoderType) {
@@ -84,14 +84,14 @@
             }
             self.avPlayer.options = options;
             [self.avPlayer replaceVideo: options];
-            NSLog(@"zfu play with av player");
+            NSLog(@"final play with av player");
             break;
         case SGDecoderTypeFFmpeg:
             if (_avPlayer) {
                 [self.avPlayer stop];
             }
             [self.ffPlayer replaceVideo: options];
-            NSLog(@"zfu play with ffmpeg");
+            NSLog(@"final play with ffmpeg");
             break;
         case SGDecoderTypeError:
             if (_avPlayer) {
