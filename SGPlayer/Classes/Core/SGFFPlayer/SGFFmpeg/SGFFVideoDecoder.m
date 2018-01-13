@@ -138,7 +138,7 @@ static AVPacket flush_packet;
         NSMutableArray <SGFFFrame *> * discardFrames = nil;
         SGFFVideoFrame * videoFrame = [self.frameQueue getFrameAsyncPosistion:position discardFrames:&discardFrames];
         if (discardFrames.count!=0) {
-        NSLog(@"position %.2f frameQueue left %lu discardFrames %lu", position, self.frameQueue.count, discardFrames.count);
+        //NSLog(@"position %.2f frameQueue left %lu discardFrames %lu", position, self.frameQueue.count, discardFrames.count);
         }
         for (SGFFVideoFrame * obj in discardFrames) {
             [obj cancel];

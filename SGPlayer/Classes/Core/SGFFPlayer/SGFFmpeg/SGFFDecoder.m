@@ -407,7 +407,7 @@ static NSTimeInterval max_packet_sleep_full_and_pause_time_interval = 0.5;
             NSTimeInterval currentStop = currentPostion + currentDuration;
             
             if (audioPositionReal-currentStop > 0.2) {
-                NSLog(@"currentStop %.2f audioPositionReal %.2f gap %.2f", currentStop, audioPositionReal, (float)(audioPositionReal-currentStop));
+                //NSLog(@"currentStop %.2f audioPositionReal %.2f gap %.2f", currentStop, audioPositionReal, (float)(audioPositionReal-currentStop));
             }
             if (currentStop <= audioPositionReal) {
                 //videoFrame = [self.videoDecoder getFrameAsyncPosistion:currentPostion];
