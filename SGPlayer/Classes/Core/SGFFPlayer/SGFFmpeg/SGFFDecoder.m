@@ -378,6 +378,8 @@ static NSTimeInterval max_packet_sleep_full_and_pause_time_interval = 0.5;
 - (SGFFVideoFrame *)decoderVideoOutputGetVideoFrameWithCurrentPostion:(NSTimeInterval)currentPostion
                                                       currentDuration:(NSTimeInterval)currentDuration
 {
+    NSTimeInterval outputAudioLatency = AVAudioSession.sharedInstance.outputLatency;
+    //NSLog(@"outputAudioLatency %.2f", outputAudioLatency);
     if (self.closed || self.error) {
         return  nil;
     }
@@ -403,7 +405,7 @@ static NSTimeInterval max_packet_sleep_full_and_pause_time_interval = 0.5;
         } else {
             NSTimeInterval audioTimeClock = self.audioFrameTimeClock;
             NSTimeInterval audioTimeClockDelta = timeInterval - audioTimeClock;
-            NSTimeInterval audioPositionReal = self.audioFramePosition + audioTimeClockDelta;
+            NSTimeInterval audioPositionReal = self.audioFramePosition + audioTimeClockDelta - outputAudioLatency;
             NSTimeInterval currentStop = currentPostion + currentDuration;
             
             if (audioPositionReal-currentStop > 0.2) {
