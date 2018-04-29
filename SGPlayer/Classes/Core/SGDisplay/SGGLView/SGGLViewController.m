@@ -86,6 +86,12 @@
     SGPLFGLViewSetContext(glView, context);
     SGPLGLContextSetCurrentContext(context);
     
+#if SGPLATFORM_TARGET_OS_MAC
+    [glView setWantsBestResolutionOpenGLSurface:YES];
+    CGFloat scale = SGPLFScreenGetScale();
+    self.view.layer.contentsScale = scale;
+#endif
+    
 #if SGPLATFORM_TARGET_OS_IPHONE_OR_TV
     glView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     glView.contentScaleFactor = [UIScreen mainScreen].scale;
