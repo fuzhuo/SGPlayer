@@ -244,7 +244,11 @@
     [program use];
     [program bindVariable];
     
+#if SGPLATFORM_TARGET_OS_IPHONE
     CGFloat scale = SGPLFScreenGetScale();
+#elif SGPLATFORM_TARGET_OS_MAC
+    CGFloat scale = [self.view.window backingScaleFactor];
+#endif
     CGRect rect = CGRectMake(0, 0, self.viewport.size.width * scale, self.viewport.size.height * scale);
     switch (videoType) {
         case SGVideoTypeNormal:

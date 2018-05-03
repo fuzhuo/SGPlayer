@@ -79,6 +79,15 @@
     }
 }
 
+#if SGPLATFORM_TARGET_OS_MAC
+- (void)viewDidChangeBackingProperties {
+    CGFloat scale = [[self window] backingScaleFactor];
+    NSLog(@"viewDidChangeBackingProperties %.2f %.2f", self.layer.contentsScale,scale);
+    self.layer.contentsScale = scale;
+    self.glViewController.view.layer.contentsScale = scale;
+}
+#endif
+
 - (void)reloadView
 {
     [self cleanView];
