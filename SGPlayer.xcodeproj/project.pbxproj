@@ -316,14 +316,6 @@
 		9C41E71A1E975631006E5A65 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C41E5E71E975631006E5A65 /* version.h */; };
 		9C41E71B1E975631006E5A65 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C41E5E71E975631006E5A65 /* version.h */; };
 		9C41E71C1E975631006E5A65 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C41E5E71E975631006E5A65 /* version.h */; };
-		9C41E71D1E97569F006E5A65 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4793431E71402E00AD4289 /* libavcodec.a */; };
-		9C41E71E1E97569F006E5A65 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4793451E71402E00AD4289 /* libavfilter.a */; };
-		9C41E71F1E97569F006E5A65 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4793461E71402E00AD4289 /* libavformat.a */; };
-		9C41E7201E97569F006E5A65 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4793471E71402E00AD4289 /* libavutil.a */; };
-		9C41E7211E97569F006E5A65 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4793481E71402E00AD4289 /* libcrypto.a */; };
-		9C41E7221E97569F006E5A65 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4793491E71402E00AD4289 /* libssl.a */; };
-		9C41E7231E97569F006E5A65 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C47934A1E71402E00AD4289 /* libswresample.a */; };
-		9C41E7241E97569F006E5A65 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C47934B1E71402E00AD4289 /* libswscale.a */; };
 		9C41E7251E9756A6006E5A65 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4793551E71403500AD4289 /* libavcodec.a */; };
 		9C41E7261E9756A6006E5A65 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4793571E71403500AD4289 /* libavfilter.a */; };
 		9C41E7271E9756A6006E5A65 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4793581E71403500AD4289 /* libavformat.a */; };
@@ -844,6 +836,8 @@
 		9CEFA6DA1E7122BF00835CAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CEFA6EA1E7125C800835CAB /* SGPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SGPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CEFA6F51E7125CC00835CAB /* SGPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SGPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E93FCD8920A354A20068BA99 /* libavresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavresample.a; path = "SGPlayer/Classes/Core/SGFFPlayer/ffmpeg/lib-tvOS/libavresample.a"; sourceTree = "<group>"; };
+		E93FCD8A20A354A20068BA99 /* libpostproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpostproc.a; path = "SGPlayer/Classes/Core/SGFFPlayer/ffmpeg/lib-tvOS/libpostproc.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -852,14 +846,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C816A281E8755E4007ED41B /* SGPlatform.framework in Frameworks */,
-				9C41E71D1E97569F006E5A65 /* libavcodec.a in Frameworks */,
-				9C41E71E1E97569F006E5A65 /* libavfilter.a in Frameworks */,
-				9C41E71F1E97569F006E5A65 /* libavformat.a in Frameworks */,
-				9C41E7201E97569F006E5A65 /* libavutil.a in Frameworks */,
-				9C41E7211E97569F006E5A65 /* libcrypto.a in Frameworks */,
-				9C41E7221E97569F006E5A65 /* libssl.a in Frameworks */,
-				9C41E7231E97569F006E5A65 /* libswresample.a in Frameworks */,
-				9C41E7241E97569F006E5A65 /* libswscale.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1276,6 +1262,8 @@
 		9C4793421E71402E00AD4289 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E93FCD8920A354A20068BA99 /* libavresample.a */,
+				E93FCD8A20A354A20068BA99 /* libpostproc.a */,
 				9C4793671E71404A00AD4289 /* libavcodec.a */,
 				9C4793681E71404A00AD4289 /* libavdevice.a */,
 				9C4793691E71404A00AD4289 /* libavfilter.a */,
@@ -2210,6 +2198,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/SGPlayer/Classes/Core/SGFFPlayer/ffmpeg/lib-iOS\"",
 					"$(PROJECT_DIR)/SGPlayer/Classes/Core/SGFFPlayer/ffmpeg/lib-iOS",
+					"$(PROJECT_DIR)/SGPlayer/Classes/Core/SGFFPlayer/ffmpeg/lib-tvOS",
 				);
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.libobjc.SGPlayer;
@@ -2238,6 +2227,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/SGPlayer/Classes/Core/SGFFPlayer/ffmpeg/lib-iOS\"",
 					"$(PROJECT_DIR)/SGPlayer/Classes/Core/SGFFPlayer/ffmpeg/lib-iOS",
+					"$(PROJECT_DIR)/SGPlayer/Classes/Core/SGFFPlayer/ffmpeg/lib-tvOS",
 				);
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.libobjc.SGPlayer;
