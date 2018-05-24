@@ -86,6 +86,12 @@
     SGPLFGLViewSetContext(glView, context);
     SGPLGLContextSetCurrentContext(context);
     
+#if SGPLATFORM_TARGET_OS_MAC
+    [glView setWantsBestResolutionOpenGLSurface:YES];
+    CGFloat scale = SGPLFScreenGetScale();
+    self.view.layer.contentsScale = scale;
+#endif
+    
 #if SGPLATFORM_TARGET_OS_IPHONE_OR_TV
     glView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     glView.contentScaleFactor = [UIScreen mainScreen].scale;
@@ -238,7 +244,11 @@
     [program use];
     [program bindVariable];
     
+#if SGPLATFORM_TARGET_OS_IPHONE
     CGFloat scale = SGPLFScreenGetScale();
+#elif SGPLATFORM_TARGET_OS_MAC
+    CGFloat scale = [self.view.window backingScaleFactor];
+#endif
     CGRect rect = CGRectMake(0, 0, self.viewport.size.width * scale, self.viewport.size.height * scale);
     switch (videoType) {
         case SGVideoTypeNormal:

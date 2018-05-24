@@ -378,7 +378,10 @@ static NSTimeInterval max_packet_sleep_full_and_pause_time_interval = 0.5;
 - (SGFFVideoFrame *)decoderVideoOutputGetVideoFrameWithCurrentPostion:(NSTimeInterval)currentPostion
                                                       currentDuration:(NSTimeInterval)currentDuration
 {
-    NSTimeInterval outputAudioLatency = AVAudioSession.sharedInstance.outputLatency;
+    NSTimeInterval outputAudioLatency = 0;
+#if SGPLATFORM_TARGET_OS_IPHONE_OR_TV
+    outputAudioLatency = AVAudioSession.sharedInstance.outputLatency;
+#endif
     //NSLog(@"outputAudioLatency %.2f", outputAudioLatency);
     if (self.closed || self.error) {
         return  nil;

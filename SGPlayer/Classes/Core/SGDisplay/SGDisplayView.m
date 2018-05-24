@@ -79,6 +79,15 @@
     }
 }
 
+#if SGPLATFORM_TARGET_OS_MAC
+- (void)viewDidChangeBackingProperties {
+    CGFloat scale = [[self window] backingScaleFactor];
+    NSLog(@"viewDidChangeBackingProperties %.2f %.2f", self.layer.contentsScale,scale);
+    self.layer.contentsScale = scale;
+    self.glViewController.view.layer.contentsScale = scale;
+}
+#endif
+
 - (void)reloadView
 {
     [self cleanView];
@@ -230,7 +239,7 @@
 }
 
 #if SGPLATFORM_TARGET_OS_MAC
-
+#if 0
 static BOOL mouse_dragged = NO;
 
 - (void)mouseDragged:(NSEvent *)event
@@ -270,6 +279,7 @@ static BOOL mouse_dragged = NO;
     mouse_dragged = NO;
 }
 
+#endif
 - (void)macOS_updateFrameAction:(NSNotification *)notification
 {
     [self updateDisplayViewLayout:self.bounds];
