@@ -84,6 +84,8 @@ SGAudioOutputContext;
         self.audioSession = [SGMacAudioSession sharedInstance];
 #elif SGPLATFORM_TARGET_OS_IPHONE_OR_TV
         self.audioSession = [AVAudioSession sharedInstance];
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback mode:AVAudioSessionModeDefault routeSharingPolicy:AVAudioSessionRouteSharingPolicyLongForm options:0 error:nil];
+        [[AVAudioSession sharedInstance] setActive:YES error:nil];
         [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(audioSessionInterruptionHandler:) name:AVAudioSessionInterruptionNotification object:nil];
         [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(audioSessionRouteChangeHandler:) name:AVAudioSessionRouteChangeNotification object:nil];
 #endif

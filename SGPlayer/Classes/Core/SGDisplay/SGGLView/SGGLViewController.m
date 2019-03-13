@@ -246,10 +246,13 @@
     
 #if SGPLATFORM_TARGET_OS_IPHONE
     CGFloat scale = SGPLFScreenGetScale();
+    CGRect rect = CGRectMake(0, 0, self.viewport.size.width * scale, self.viewport.size.height * scale);
 #elif SGPLATFORM_TARGET_OS_MAC
     CGFloat scale = [self.view.window backingScaleFactor];
-#endif
     CGRect rect = CGRectMake(0, 0, self.viewport.size.width * scale, self.viewport.size.height * scale);
+#else
+    CGRect rect = CGRectMake(0, 0, self.viewport.size.width, self.viewport.size.height);
+#endif
     switch (videoType) {
         case SGVideoTypeNormal:
         {
